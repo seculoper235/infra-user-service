@@ -14,7 +14,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class User {
     @Id
-    @Convert(converter = UUIDConverter.class)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @Column(nullable = false, length = 10)
