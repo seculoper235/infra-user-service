@@ -38,6 +38,21 @@ public class UserServiceTest {
     }
 
     @Test
+    @DisplayName("사용자 정보 변경 시, 사용자가 존재하지 않으면 Exception을 던진다")
+    public void update_user_data_not_exist_throws_exception() {
+        UUID id = UUID.randomUUID();
+
+        String nickname = "updateNickname";
+
+        given(userRepository.findById(id))
+                .willReturn(Optional.empty());
+
+        assertTrue(userService.update(id, nickname).isLeft());
+        assertThrows(Exception.class, () ->
+                userService.find(id).getOrElseThrow(it -> it));
+    }
+
+    @Test
     @DisplayName("사용자 닉네임 중복 확인 시, 중복된 닉네임이라면 true를 반환한다")
     public void nickname_duplicate_check_param_nickname_duplicated_return_true() {
         String duplicated = "duplicated";

@@ -37,8 +37,13 @@ public class User {
         this.email = email;
     }
 
+    public void updateInfo(String nickname) {
+        this.nickname = nickname;
+    }
+
     public UserInfo toInfo() {
         return new UserInfo(
+                id,
                 nickname
         );
     }
