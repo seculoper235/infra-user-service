@@ -1,5 +1,7 @@
 package com.example.infrauserservice.model;
 
+import com.example.infrauserservice.service.UserDetail;
+import com.example.infrauserservice.service.UserInfo;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.AccessLevel;
@@ -33,5 +35,19 @@ public class User {
         this.name = name;
         this.nickname = nickname;
         this.email = email;
+    }
+
+    public UserInfo toInfo() {
+        return new UserInfo(
+                nickname
+        );
+    }
+
+    public UserDetail toDetail() {
+        return new UserDetail(
+                name,
+                nickname,
+                email
+        );
     }
 }
