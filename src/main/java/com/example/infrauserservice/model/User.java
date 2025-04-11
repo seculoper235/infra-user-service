@@ -31,12 +31,6 @@ public class User {
     @Column(nullable = false)
     private String email;
 
-    public User(String name, String nickname, String email) {
-        this.name = name;
-        this.nickname = nickname;
-        this.email = email;
-    }
-
     public void updateInfo(String nickname) {
         this.nickname = nickname;
     }
