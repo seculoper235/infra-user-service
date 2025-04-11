@@ -1,6 +1,7 @@
 package com.example.infrauserservice.service;
 
 import com.example.infrauserservice.infra.UserRepository;
+import com.example.infrauserservice.web.exception.model.EntityNotFoundException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,7 +34,7 @@ public class UserServiceTest {
                 .willReturn(Optional.empty());
 
         assertTrue(userService.find(id).isLeft());
-        assertThrows(Exception.class, () ->
+        assertThrows(EntityNotFoundException.class, () ->
                 userService.find(id).getOrElseThrow(it -> it));
     }
 
@@ -48,7 +49,7 @@ public class UserServiceTest {
                 .willReturn(Optional.empty());
 
         assertTrue(userService.update(id, nickname).isLeft());
-        assertThrows(Exception.class, () ->
+        assertThrows(EntityNotFoundException.class, () ->
                 userService.find(id).getOrElseThrow(it -> it));
     }
 

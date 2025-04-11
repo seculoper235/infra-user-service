@@ -2,6 +2,7 @@ package com.example.infrauserservice.service;
 
 import com.example.infrauserservice.infra.UserRepository;
 import com.example.infrauserservice.model.User;
+import com.example.infrauserservice.web.exception.model.EntityNotFoundException;
 import io.vavr.control.Either;
 import io.vavr.control.Option;
 import lombok.RequiredArgsConstructor;
@@ -22,20 +23,20 @@ public class UserService {
                 .stream().map(User::toInfo).toList();
     }
 
-    public Either<Exception, UserDetail> find(UUID id) {
+    public Either<EntityNotFoundException, UserDetail> find(UUID id) {
         return Option.ofOptional(userRepository.findById(id))
                 .map(User::toDetail)
-                .toEither(() -> new Exception("존재하지 않는 사용자입니다"));
+                .toEither(() -> new EntityNotFoundException("존재하지 않는 사용자입니다"));
     }
 
-    public Either<Exception, UserDetail> update(
+    public Either<EntityNotFoundException, UserDetail> update(
             UUID id,
             String nickname
     ) {
         return Option.ofOptional(userRepository.findById(id))
                 .peek(user -> user.updateInfo(nickname))
                 .map(User::toDetail)
-                .toEither(() -> new Exception("존재하지 않는 사용자입니다"));
+                .toEither(() -> new EntityNotFoundException("존재하지 않는 사용자입니다"));
     }
 
     public Boolean duplicatedCheck(String nickname) {
