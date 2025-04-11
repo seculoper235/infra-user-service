@@ -9,6 +9,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -26,14 +27,14 @@ public class UserServiceTest {
     @Test
     @DisplayName("사용자 단일 조회 시, 사용자가 존재하지 않으면 Exception을 던진다")
     public void select_user_not_exist_throws_exception() {
-        String nickname = "NotExist";
+        UUID id = UUID.randomUUID();
 
-        given(userRepository.findByNickname(nickname))
+        given(userRepository.findById(id))
                 .willReturn(Optional.empty());
 
-        assertTrue(userService.find(nickname).isLeft());
+        assertTrue(userService.find(id).isLeft());
         assertThrows(Exception.class, () ->
-                userService.find(nickname).getOrElseThrow(it -> it));
+                userService.find(id).getOrElseThrow(it -> it));
     }
 
     @Test

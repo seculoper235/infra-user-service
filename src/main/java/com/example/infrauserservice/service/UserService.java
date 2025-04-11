@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 @Service
@@ -21,8 +22,8 @@ public class UserService {
                 .stream().map(User::toInfo).toList();
     }
 
-    public Either<Exception, UserDetail> find(String nickname) {
-        return Option.ofOptional(userRepository.findByNickname(nickname))
+    public Either<Exception, UserDetail> find(UUID id) {
+        return Option.ofOptional(userRepository.findById(id))
                 .map(User::toDetail)
                 .toEither(() -> new Exception("존재하지 않는 사용자입니다"));
     }
