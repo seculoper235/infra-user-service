@@ -9,4 +9,16 @@ public class UserServiceTest {
     public void select_user_not_exist_throws_exception() {
         //
     }
+
+    @Test
+    @DisplayName("사용자 닉네임 중복 확인 시, 중복된 닉네임이라면 true를 반환한다")
+    public void nickname_duplicate_check_param_nickname_duplicated_return_true() {
+        //
+    }
+
+    @Test
+    @DisplayName("사용자 닉네임 중복 확인 시, 유일한 닉네임이라면 false를 반환한다")
+    public void nickname_duplicate_check_param_nickname_unique_return_false() {
+        //
+    }
 }

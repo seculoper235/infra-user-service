@@ -36,4 +36,3 @@ databaseChangeLog:
                   type: varchar(255)
                   constraints:
                     nullable: false
-                    updatable: false

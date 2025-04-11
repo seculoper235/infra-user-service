@@ -1,9 +1,11 @@
 package com.example.infrauserservice.model;
 
-import com.example.infrauserservice.common.UUIDConverter;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
@@ -24,6 +26,12 @@ public class User {
     private String nickname;
 
     @Email
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false)
     private String email;
+
+    public User(String name, String nickname, String email) {
+        this.name = name;
+        this.nickname = nickname;
+        this.email = email;
+    }
 }
